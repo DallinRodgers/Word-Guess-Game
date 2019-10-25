@@ -5,28 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Word Guess Game</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="container flex">
       <div class="content">
         <h1>Word Guess Game</h1>
-        <div class="game-details">
+        <div class="game-details flex around">
           <div class="letters-guessed">
-            <h4>Letters Guessed</h4>
+            <h4 class="border-bottom">Letters Guessed</h4>
             <span class="guessed">
               L D I N A E
             </span>
           </div>
           <div class="word-to-guess">
-            <h4>Word to Guess</h4>
+            <h4 class="border-bottom">Word to Guess</h4>
             <span class="word">
               A _ _ L E
             </span>
           </div>
           <div class="guess-remaining">
-            <h4>Guesses Remaining</h4>
+            <h4 class="border-bottom">Guesses Remaining</h4>
             <span class="remaining">5</span>
           </div>
         </div>
