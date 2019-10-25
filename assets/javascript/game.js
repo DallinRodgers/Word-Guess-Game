@@ -4,7 +4,8 @@ var words,
   guessedLetters,
   alreadyGuessed,
   hiddenWord,
-  wordToHide;
+  wordToHide,
+  reveal;
 words = ["mcdonalds", "coke", "fries", "hamburger", "chicken"];
 // words = ["coke"];
 guessedLetters = [];
@@ -12,16 +13,27 @@ alreadyGuessed = [];
 hiddenWord = [];
 wordToHide = getWord();
 
+var body = document.querySelector("#body");
+var h1 = document.querySelector("h1");
+var gameDetails = document.querySelector(".game-details");
+var bottomBorder = document.querySelectorAll(".border-bottom");
 var guessed = document.querySelector(".guessed");
 var word = document.querySelector(".word");
 var remaining = document.querySelector(".remaining");
 
 function init() {
-  guesses = 10;
+  guesses = 12;
   gamePlaying = true;
   guessed.textContent = "-";
   word.textContent = hideWord();
   remaining.textContent = guesses;
+
+  body.classList.remove("bg-win");
+  body.classList.remove("bg-loss");
+  gameDetails.classList.remove("game-details-win");
+  for (var i = 0; i < bottomBorder.length; i++) {
+    bottomBorder[i].classList.remove("border-bottom-win");
+  }
 }
 
 function getWord() {
@@ -60,18 +72,40 @@ function revealWord(event) {
       if (wordToHide[i] === event.key) {
         // Update UI
         hiddenWord[i] = event.key;
-        var reveal = hiddenWord.join("");
+        reveal = hiddenWord.join("");
         word.textContent = reveal.toUpperCase();
       }
     }
   }
 }
+function didYouWin() {
+  if (wordToHide === reveal) {
+    gamePlaying = false;
+    body.classList.add("bg-win");
+    gameDetails.classList.add("game-details-win");
+    for (var i = 0; i < bottomBorder.length; i++) {
+      bottomBorder[i].classList.add("border-bottom-win");
+    }
+    h1.textContent = "you win!!!!".toUpperCase();
+  }
+}
+function didYouLose() {
+  if (guesses === 0) {
+    gamePlaying = false;
+    body.classList.add("bg-loss");
+    gameDetails.classList.add("game-details-loss");
+    for (var i = 0; i < bottomBorder.length; i++) {
+      bottomBorder[i].classList.add("border-bottom-loss");
+    }
+    h1.textContent = "you lose!!!!".toUpperCase();
+  }
+}
 document.addEventListener("keypress", function(event) {
-  if (guesses > 0) {
+  if (guesses > 0 && gamePlaying) {
     lettersGuessed(event);
     revealWord(event);
-  } else {
-    alert("Out of guesses");
+    didYouWin();
+    didYouLose();
   }
 });
 

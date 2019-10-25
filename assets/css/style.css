@@ -59,3 +59,34 @@ h4 {
   display: block;
   text-align: center;
 }
+
+.bg-win {
+  background: rgb(255, 195, 110);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 195, 110, 1) 0%,
+    rgb(255, 215, 160) 50%,
+    rgb(255, 228, 190) 100%
+  );
+}
+.bg-loss {
+  background: rgb(255, 18, 18);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 18, 18, 1) 0%,
+    rgb(255, 65, 65) 50%,
+    rgb(255, 174, 174) 100%
+  );
+}
+.game-details-win {
+  border: 5px solid rgb(255, 195, 110);
+}
+.border-bottom-win {
+  border-bottom: 2px dashed rgb(255, 195, 110);
+}
+.game-details-loss {
+  border: 5px solid rgb(255, 18, 18);
+}
+.border-bottom-loss {
+  border-bottom: 2px dashed rgb(255, 18, 18);
+}
