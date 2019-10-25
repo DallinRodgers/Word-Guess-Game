@@ -1,7 +1,16 @@
-var words, guesses, gamePlaying, guessedLetters, alreadyGuessed;
+var words,
+  guesses,
+  gamePlaying,
+  guessedLetters,
+  alreadyGuessed,
+  hiddenWord,
+  wordToHide;
 words = ["mcdonalds", "coke", "fries", "hamburger", "chicken"];
+// words = ["coke"];
 guessedLetters = [];
 alreadyGuessed = [];
+hiddenWord = [];
+wordToHide = getWord();
 
 var guessed = document.querySelector(".guessed");
 var word = document.querySelector(".word");
@@ -21,13 +30,11 @@ function getWord() {
   return randomWord;
 }
 function hideWord() {
-  var wordToHide = getWord();
-  var hiddenWord = [];
   for (var i = 0; i < wordToHide.length; i++) {
     hiddenWord.push("_");
   }
-  hiddenWord = hiddenWord.join("");
-  return hiddenWord;
+  var hidden = hiddenWord.join("");
+  return hidden;
 }
 function lettersGuessed(event) {
   if (event.keyCode !== 13) {
@@ -41,15 +48,28 @@ function lettersGuessed(event) {
     }
   }
 }
-
 function updateGuessCount() {
   guesses = guesses - 1;
   remaining.textContent = guesses;
 }
-
+function revealWord(event) {
+  //   check if letter is in word
+  if (wordToHide.includes(event.key)) {
+    // Update hiddenWord
+    for (var i = 0; i < wordToHide.length; i++) {
+      if (wordToHide[i] === event.key) {
+        // Update UI
+        hiddenWord[i] = event.key;
+        var reveal = hiddenWord.join("");
+        word.textContent = reveal.toUpperCase();
+      }
+    }
+  }
+}
 document.addEventListener("keypress", function(event) {
   if (guesses > 0) {
     lettersGuessed(event);
+    revealWord(event);
   } else {
     alert("Out of guesses");
   }
