@@ -100,7 +100,7 @@ function didYouLose() {
     h1.textContent = "you lose!!!!".toUpperCase();
   }
 }
-document.addEventListener("keypress", function(event) {
+document.addEventListener("keyup", function(event) {
   if (guesses > 0 && gamePlaying) {
     lettersGuessed(event);
     revealWord(event);
